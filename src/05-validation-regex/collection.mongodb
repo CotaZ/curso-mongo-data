@@ -1,0 +1,46 @@
+use("platzi_store")
+
+db.users.drop()
+
+db.createCollection("users", {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['email', 'password', 'role'],
+            properties: {
+                name: {
+                    bsonType: 'string',
+                    description: "'name' must be a string and is required"
+                },
+                last_name: {
+                    bsonType: 'string',
+                    description: "'lastname' must be a string and is required"
+                },
+                email: {
+                    bsonType: 'string',
+                    description: "'email' must be a string and is required",
+                    pattern: "^[A-Za-z\\d.-]{1,}@[A-Za-z\\d.-]{1,}[.]{1}[A-Za-z\\d.-]{1,}$"
+                },
+                password: {
+                    bsonType: 'string',
+                    description: "'password' must be a string and is required",
+                    pattern: "^.{16,40}$"
+                    // "^": Indica que la coincidencia debe comenzar desde el principio de la cadena.
+                    // ".": Representa cualquier carácter (excepto una nueva línea).
+                    // "{16,40}": Es una cuantificador de repetición que especifica que el patrón anterior (el punto ".") debe repetirse al menos 16 veces y máximo 40 veces.
+                },
+                age: {
+                    bsonType: 'number',
+                    minimum: 18,
+                    maximum: 99
+                },
+                isSingle: {
+                    bsonType: 'bool'
+                },
+                role: {
+                    enum: ['customer', 'seller', 'admin']
+                }
+            }
+        }
+    }
+})
