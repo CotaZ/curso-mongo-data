@@ -1,0 +1,10 @@
+use("platzi_store")
+
+db.orders.insertOne({
+    user_id: ObjectId('64d12907d2b342cdef8a64d6'),
+    date: '2023-08-12',
+    total: 0,
+    items: []
+})
+
+// Primero generar codigo total y luego copiarlo y pegarlo (insertalo en el archivo: add-item en el _id: ObjectId('64d1917873f7de8a6461e66f'))
